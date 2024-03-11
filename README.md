@@ -166,10 +166,10 @@ Pass in the user's data (email, phone, etc.) along with the bundle that is sent 
 |--------------|------------------------------------------------------------------------------------------------------------|
 | email        | Person's email address                                                                                     |
 | bundle       | The 'bundle' that Danger added to the form in the hidden field 'danger-bundle'                             |
-| type         | (Optional) Event type, either `"new_user"` (default) or `"login"`                                              |
+| type         | (Optional) Event type, either `"new_user"` (default) or `"login"`                                          |
 | name         | (Optional) Person's name                                                                                   |
 | phone        | (Optional) Person's phone number                                                                           |
-| address      | (Optional) Person's address, a dict with keys `address1`, `address2`, `city`, `state`, `country`, `postal_code` |
+| address      | (Optional) Person's address, a dict with one or more of the keys `address1`, `address2`, `city`, `state`, `country`, `postal_code` |
 | ip           | (Optional) The remote IP address, i.e. that of the person's connection. Defaults to `request.remote_addr`. |
 | external_id  | (Optional) An external identifier for this person, i.e. your app's database ID                             |
 
@@ -181,10 +181,10 @@ Returns a result object with the following properties:
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | allow         | Either `True` (allow) or `False` (block)                                                                                                                                                       |
 | outcome       | Either the full outcome of the event (`'allow'`, `'allow_review'`, `'block'`, `'block_review'`, `'review'`), or `None` on failure                                                              |
-| country       | The [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code for the user (e.g. `'US'`)                                                                                                                                           |
-| timezone      | The [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) timezone for the user (`'America/New_York'`)                                                                                                                                   |
+| country       | The [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code for the user (e.g. `'US'`)                                                                             |
+| timezone      | The [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) timezone for the user (`'America/New_York'`)                                                                   |
 | address_valid | Validity of the address. Either `True` (valid), `False` (not valid), or `None` (couldn't be validated).                                                                                        |
-| address       | If `address_valid` is `True`, holds the parsed address. Otherwise, holds the input address. A dict with keys address1, address2, city, state, country, postal_code, or `None` if not provided. |
+| address       | If `address_valid` is `True`, holds the parsed address. Otherwise, holds the input address. A dict with one or more of the keys `address1`, `address2`, `city`, `state`, `country`, `postal_code`. If no address provided, `None`. |
 | email_valid   | Validity of the email address. Either `True` (valid), `False` (not valid), or `None` (couldn't be validated).                                                                                  |
 | email         | If `email_valid` is `True`, holds the normalized email address. Otherwise, holds the input email address.                                                                                      |
 | phone_valid   | Validity of the phone number. Either `True` (valid), `False` (not valid), or `None` (couldn't be validated).                                                                                   |
