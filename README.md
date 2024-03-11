@@ -158,6 +158,10 @@ You can also find the full Danger result in the `data` property:
 
 ## Reference
 
+### `{{ danger }}` template variable
+
+Create the HTML to include in the client side HTML form. Use inside a template using [Jinja](https://jinja.palletsprojects.com/) syntax `{{ danger }}`. Add this anywhere within your form.
+
 ### `danger.event()`
 
 Pass in the user's data (email, phone, etc.) along with the bundle that is sent in the 'danger-bundle' field on your form.
