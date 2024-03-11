@@ -149,8 +149,8 @@ If you need to check validity, you can use `email_valid`, `phone_valid`, and `ad
 You can also find the full Danger result in the `data` property:
 
 ```python
-    user_data = result.data
-    browser = result.data["device"]["browser"]
+    device = result.data.get("device", {})
+    browser = device.get("browser")
     # Chrome
 ```
 
