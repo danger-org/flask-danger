@@ -5,8 +5,6 @@ from dataclasses import dataclass
 from flask import Flask, request
 from markupsafe import Markup
 
-EVENT_URL = "https://app.usedanger.com/api/v1/event"
-SCRIPT_URL = "https://js.usedanger.com/v1/api.js"
 
 @dataclass
 class EventResult:
@@ -29,6 +27,8 @@ class NotFlaskApp(Exception):
 
 
 class BaseConfig:
+    event_url = "https://app.usedanger.com/api/v1/event"
+    script_url = "https://js.usedanger.com/v1/api.js"
     timeout = None
     fallback_allow = True
     fallback_country = "US"
@@ -52,6 +52,8 @@ class FlaskDanger(BaseConfig):
         Args:
             app: Flask object
         """
+        self.event_url = app.config.get("DANGER_EVENT_URL", self.event_url)
+        self.script_url = app.config.get("DANGER_SCRIPT_URL", self.script_url)
         self.site_key = app.config.get("DANGER_SITE_KEY")
         self.secret_key = app.config.get("DANGER_SECRET_KEY")
         self.timeout = app.config.get("DANGER_TIMEOUT", self.timeout)
@@ -69,7 +71,7 @@ class FlaskDanger(BaseConfig):
         syntax {{ danger }}. Add this anywhere within your form.
         """
         return Markup(
-            f'<script src="{SCRIPT_URL}" async defer></script>\n' +
+            f'<script src="{self.script_url}" async defer></script>\n' +
             f'<input type="hidden" name="danger-bundle" data-sitekey="{self.site_key}">'
         )
 
@@ -132,7 +134,7 @@ class FlaskDanger(BaseConfig):
         )
 
         try:
-            response = requests.post(EVENT_URL, json=data, timeout=http_timeout)
+            response = requests.post(self.event_url, json=data, timeout=http_timeout)
         except requests.exceptions.ConnectionError:
             return result
         except requests.exceptions.Timeout:
