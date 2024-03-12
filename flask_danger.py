@@ -40,10 +40,10 @@ class Danger(BaseConfig):
     secret_key = None
 
     def __init__(self, app: Flask = None):
-        if not isinstance(app, Flask):
-            raise NotFlaskApp(f"Object {app} not a Flask instance.")
-
-        self.init_app(app)
+        if app is not None:
+            if not isinstance(app, Flask):
+                raise NotFlaskApp(f"Object {app} not a Flask instance.")
+            self.init_app(app)
 
     def init_app(self, app: Flask):
         """
