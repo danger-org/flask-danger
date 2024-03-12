@@ -1,5 +1,5 @@
 import requests
-from logging import log
+import logging
 from typing import Literal
 from dataclasses import dataclass
 from flask import Flask, request
@@ -154,7 +154,7 @@ class Danger(BaseConfig):
                 # Likely temporary errors such as rate limited or service unavailable
                 # Return the default result in this case, to fail open
                 # Don't raise an exception, but log the error
-                log.error("Flask-Danger: There was an error logging an event, but Danger responded with the fallback result. " + json.get("message", f"Received HTTP status code {response.status_code}."))
+                logging.error("Flask-Danger: There was an error logging an event, but Danger responded with the fallback result. " + json.get("message", f"Received HTTP status code {response.status_code}."))
                 return result
 
             result.data = json
