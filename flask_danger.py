@@ -35,7 +35,7 @@ class BaseConfig:
     fallback_timezone = "UTC"
 
 
-class FlaskDanger(BaseConfig):
+class Danger(BaseConfig):
     site_key = None
     secret_key = None
 

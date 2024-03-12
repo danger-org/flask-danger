@@ -56,14 +56,14 @@ Now you're ready to import Flask-Danger:
 
 ```python
 from flask import Flask
-from flask_danger import FlaskDanger
+from flask_danger import Danger
 
 app = Flask(__name__)
-danger = FlaskDanger(app)
+danger = Danger(app)
 
 # or with the factory pattern
 
-FlaskDanger = danger()
+danger = Danger()
 danger.init_app(app)
 ```
 

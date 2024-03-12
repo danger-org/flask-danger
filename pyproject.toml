@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Flask-Danger"
-version = "1.0.5"
+version = "1.0.6"
 description = "Flask extension for Danger (https://usedanger.com). Provides helpers to render the Danger widget on auth forms and to send server-side events."
 readme = "README.md"
 authors = [{ name = "Danger", email = "support@usedanger.com" }]
