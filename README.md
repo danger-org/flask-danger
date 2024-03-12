@@ -1,4 +1,4 @@
-![Flask-Danger: The official Flask extension for Danger](.github/images/banner.png)
+![Flask-Danger: The official Flask extension for Danger](https://raw.githubusercontent.com/danger-org/flask-danger/main/.github/images/banner.png)
 
 [Danger](https://usedanger.com) helps you to protect your Flask app from bad actors, validate user info, set a user's default country and timezone accurately, and detect repeat signups or credential sharing.
 
