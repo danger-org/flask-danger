@@ -112,7 +112,7 @@ class Danger(BaseConfig):
         # Set HTTP read timeout to be 3 seconds longer than
         # the Danger timeout, then we're sure to have a
         # result back by then.
-        # Set connect timeout to 3 seconds.
+        # Set connect timeout to 5 seconds.
         http_timeout = (5, self.timeout + 3)
         
         # Create a result instance with default/fallback values
