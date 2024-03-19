@@ -29,7 +29,7 @@ class NotFlaskApp(Exception):
 class BaseConfig:
     event_url = "https://app.usedanger.com/api/v1/event"
     script_url = "https://js.usedanger.com/v1/api.js"
-    timeout = None
+    timeout = 8
     fallback_allow = True
     fallback_country = "US"
     fallback_timezone = "UTC"
@@ -109,12 +109,11 @@ class Danger(BaseConfig):
             if value is not None:
                 data[property] = value
         
-        if self.timeout:
-            http_timeout = self.timeout + 5
-        else:
-            # Timeout isn't explicitly set, so Danger will use the timeout setting for the site
-            # We don't know what this is, but we still need to set a sensible HTTP timeout.
-            http_timeout = 30
+        # Set HTTP read timeout to be 3 seconds longer than
+        # the Danger timeout, then we're sure to have a
+        # result back by then.
+        # Set connect timeout to 3 seconds.
+        http_timeout = (5, self.timeout + 3)
         
         # Create a result instance with default/fallback values
         # Either return this directly, or augment with actual result if possible
